@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+<!-- E : mobile -->
+<title>타이틀</title>
+<link rel="stylesheet" href="../assets/css/style.css" />
+<script src="../assets/js/jquery-2.2.4.js"></script>
+<script src="../assets/js/swiper.js"></script>
+<script src="../assets/js/swiper-bundle.js"></script>
+<!-- <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<script src="js/selectivizr.js">
+-->
+<!--[if lte IE 9]>
+</script>
+<![endif]-->
+</head>
+<body>
+<style>
+.hide {position: absolute; top: -9999px; left: -9999px; overflow: hidden; width: 1px; height: 1px; opacity: 0;}
+.comm_tabMenu ul {display: flex;}
+.comm_tabMenu ul li {flex: 1; margin-left: -1px; border: 1px solid #ccc;}
+.comm_tabMenu ul li a {display: block; color: #000;}
+.comm_tabMenu ul li.curr a {font-weight: 700;}
+.comm_tabBox {padding: 20px 0;}
+.comm_tabBox > div {display: none;}
+</style>
+<div class="comm_tabWrap tabFunc">
+    <div class="comm_tabMenu">
+        <ul>
+            <li class="curr"><a href="" aria-controls="tab01">Menu01</a></li>
+            <li><a href="" aria-controls="tab02">Menu02</a></li>
+            <li><a href="" aria-controls="tab03">Menu03</a></li>
+            <li><a href="" aria-controls="tab04">Menu04</a></li>
+        </ul>
+    </div>
+    <div class="comm_tabBox">
+        <!-- Menu01 -->
+        <div id="tab01">
+            Menu01
+        </div>
+        <!--// Menu01 -->
+        <!-- Menu02 -->
+        <div id="tab02">
+            Menu02
+        </div>
+        <!--// Menu02 -->
+        <!-- Menu03 -->
+        <div id="tab03">
+            Menu03
+        </div>
+        <!--// Menu03 -->
+        <!-- Menu04 -->
+        <div id="tab04">
+            Menu04
+        </div>
+        <!--// Menu04 -->
+    </div>
+</div>
+<script>
+let tabFunc = $('.tabFunc');
+tabFunc.each(function(){
+    let tm = $(this).find('> .comm_tabMenu a'),
+        tb = $(this).find('> .comm_tabBox > div'),
+        curr = $(this).find('> .comm_tabMenu li.curr a'),
+        currInd = curr.index(),
+        currTxt = curr.text();
+    curr.attr('title', '선택됨');
+    tb.eq(currInd).show().prepend("<h3 class='hide'>" + currTxt + "</h3>");
+    tm.on('click', function(e){
+        e.preventDefault();
+        let $txt = $(this).text(),
+            $ind = $(this).parent().index();
+        tm.removeAttr('title').parent().removeClass('curr');
+        tb.hide().find('h3.hide').remove();
+        $(this).attr('title', '선택됨').parent().addClass('curr');
+        tb.eq($ind).show().prepend("<h3 class='hide'>" + $txt + "</h3>");
+    });
+});
+
+// let tabFunc = $('.tabFunc');
+// tabFunc.each(function(){
+//     let tm = $(this).find('> .comm_tabMenu a'),
+//         tb = $(this).find('> .comm_tabBox > div'),
+//         curr = $(this).find('> .comm_tabMenu li.curr a'),
+//         currTxt = curr.text(),
+//         currId = curr.attr('aria-controls');
+//         console.log(currTxt)
+//     curr.attr('title', '선택됨');
+//     $('#' + currId).show().prepend("<h3 class='hide'>" + currTxt + "</h3>");
+//     tm.on('click', function(e){
+//         e.preventDefault();
+//         let $txt = $(this).text(),
+//             $id = $(this).attr('aria-controls');
+//         tm.removeAttr('title').parent().removeClass('curr');
+//         tb.hide().find('h3.hide').remove();
+//         $(this).attr('title', '선택됨').parent().addClass('curr');
+//         $('#' + $id).show().prepend("<h3 class='hide'>" + $txt + "</h3>");;
+//     });
+// });
+</script>
+</body>
+</html>
