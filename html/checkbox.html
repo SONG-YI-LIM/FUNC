@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="format-detection" content="telephone=no, address=no, email=no">
+<!-- E : mobile -->
+<title>타이틀</title>
+<link rel="stylesheet" href="../assets/css/style.css" />
+<script src="../assets/js/jquery-2.2.4.js"></script>
+<script src="../assets/js/swiper.js"></script>
+<script src="../assets/js/swiper-bundle.js"></script>
+<!-- <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<script src="js/selectivizr.js">
+-->
+<!--[if lte IE 9]>
+</script>
+<![endif]-->
+</head>
+<body>
+<div class="checkboxWrap">
+    <div class="checkbox">
+        <label for="chkAll01"><input type="checkbox" id="chkAll01" class="chkAll" data-group="cg1">Checkbox ALL</label>
+    </div>
+    <div class="checkbox">
+        <label for="chk0101"><input type="checkbox" id="chk0101" data-group="cg1" data-trigger="cg1">Checkbox 01</label>
+    </div>
+    <div class="checkbox">
+        <label for="chk0102"><input type="checkbox" id="chk0102" data-group="cg1" data-trigger="cg1">Checkbox 02</label>
+    </div>
+    <div class="checkbox">
+        <label for="chk0103"><input type="checkbox" id="chk0103" data-group="cg1" data-trigger="cg1">Checkbox 03</label>
+    </div>
+</div>
+
+<div class="checkbox">
+    <label for="chkAll02"><input type="checkbox" id="chkAll02" class="chkAll" data-group="cg2">Checkbox ALL</label>
+</div>
+<div class="checkbox">
+    <label for="chk0201"><input type="checkbox" id="chk0201" data-group="cg2" data-trigger="cg2">Checkbox 04</label>
+</div>
+<div class="checkbox">
+    <label for="chk0202"><input type="checkbox" id="chk0202" data-group="cg2" data-trigger="cg2">Checkbox 05</label>
+</div>
+<div class="checkbox">
+    <label for="chk0203"><input type="checkbox" id="chk0203" data-group="cg2" data-trigger="cg2">Checkbox 06</label>
+</div>
+<script>
+let checkbox = $('.checkbox');
+checkbox.each(function(){
+    let chkAll = $('.chkAll'),
+        chkEach = $(this).find('input').not(chkAll);
+    chkAll.on('change', function(){
+        let checked = $(this).prop('checked'),
+            myData = $(this).data('group');
+        $('input[data-group="' + myData + '"]').prop('checked', checked);
+    });
+    chkEach.on('change', function(){
+        let myData = $(this).data('trigger'),
+            boxLength = $('input[data-trigger="' + myData + '"]').length,
+			checkedLength = $('input[data-trigger="' + myData + '"]:checked').length,
+			selectAll = (boxLength == checkedLength);
+        $('input[data-group="' + myData + '"].chkAll').prop('checked', selectAll);
+    });
+});
+</script>
+</body>
+</html>
